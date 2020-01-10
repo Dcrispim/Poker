@@ -6,7 +6,7 @@ class Player:
     def __repr__(self):
         return self.name
 
-    def get_cards(self, *cards:list[Card]):
+    def get_cards(self, *cards:list):
         for card in cards:
             self.hand.append(card)
     

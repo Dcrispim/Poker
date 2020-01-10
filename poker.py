@@ -70,7 +70,7 @@ def get_winner(*players:list)->tuple:
             _max = points
     return winner, player_score
 
-def make_hand(lenght: int, Deck:list[Card], player:Player)->list(Card):
+def make_hand(lenght: int, Deck:list, player:Player)->list:
     """Cria o Define o vencedor
     Parameters:
     length (int): numero de cartas
@@ -92,6 +92,10 @@ def make_hand(lenght: int, Deck:list[Card], player:Player)->list(Card):
     return hand   
 
 
+MAX_PLAYERS = 4
+MIN_PLAYERS = 2
+HAND_LENGTH = 5
+
 while QUIT!=True:
     print('Preciona [Q] para sair')
     Op = input('Quantos jogadores?')
@@ -105,15 +109,16 @@ while QUIT!=True:
     except ValueError:
         player_number = 0
 
-    if 2<=player_number <=4:
+    if MIN_PLAYERS <= player_number <= MAX_PLAYERS:
 
         deck = shuffle(suitRanking, valueRanking[1:])
         players = []
+
         try:
             for player in range(player_number):
                 
                 players.append(Player(f'Player {player}'))            
-                players[-1].get_cards(*make_hand(5,deck,players[-1]))
+                players[-1].get_cards(*make_hand(HAND_LENGTH,deck,players[-1]))
 
 
             score = get_winner(*players)
@@ -130,6 +135,6 @@ while QUIT!=True:
 
     else:
         
-        print('Por favor digite um numero entre 2 e 4')
+        print(f'Por favor digite um numero entre {MIN_PLAYERS} e {MAX_PLAYERS}')
         
 
